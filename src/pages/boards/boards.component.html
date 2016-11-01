@@ -1,0 +1,18 @@
+<ion-header *ngIf="trelloAuthorized">
+  <ion-navbar color="primary">
+    <button ion-button secondary menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Boards</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding *ngIf="trelloAuthorized">
+
+  <ion-card *ngFor="let board of boardsArr">
+    <ion-card-header>
+      {{board.name}}
+    </ion-card-header>
+  </ion-card>
+
+</ion-content>
