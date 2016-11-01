@@ -15,12 +15,13 @@ export class Boards {
   trelloAuthorized: boolean = false;
   boardsArr: BoardModel[] = [];
 
-  constructor(public navCtrl: NavController, public trelloService: TrelloService, public boardService: BoardService) { }
+  constructor(private navCtrl: NavController, private trelloService: TrelloService, private boardService: BoardService) { }
 
   ngOnInit(){
+    //alert("comp");
     if (localStorage.getItem("trello_token")){
       this.trelloAuthorized = true;
-      this.boardsArr = this.boardService.getBoards();
+      this.boardService.getBoards().subscribe( boards => this.boardsArr = boards );
     }
     else {
       this.trelloService.trelloAuthorize();

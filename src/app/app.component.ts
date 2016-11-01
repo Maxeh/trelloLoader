@@ -13,7 +13,7 @@ export class MyApp {
   rootPage: any = Boards;
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform) {
+  constructor(private platform: Platform) {
     this.initializeApp();
 
     this.pages = [
