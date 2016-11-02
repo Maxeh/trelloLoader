@@ -1,18 +1,27 @@
 <ion-header *ngIf="trelloAuthorized">
   <ion-navbar color="primary">
-    <button ion-button secondary menuToggle>
+    <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Boards</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding *ngIf="trelloAuthorized">
+<ion-content *ngIf="trelloAuthorized">
 
-  <ion-card *ngFor="let board of boardsArr">
-    <ion-card-header>
-      {{board.name}}
-    </ion-card-header>
-  </ion-card>
+  <ion-searchbar placeholder="Suchen" #search (ionInput)="onSearch(search.value)"></ion-searchbar>
+
+  <ion-item no-lines>
+    <ion-label>Geschlossene Boards zeigen</ion-label>
+    <ion-toggle [(ngModel)]="showClosed"></ion-toggle>
+  </ion-item>
+
+  <ion-list>
+    <div *ngFor="let board of boardsArr">
+      <button ion-item *ngIf="(showClosed || !board.closed) && (board.name | filterSearch)">
+        {{board.name}}
+      </button>
+    </div>
+  </ion-list>
 
 </ion-content>

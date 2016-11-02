@@ -14,11 +14,11 @@ import { BoardService } from './board.service';
 export class Boards {
   trelloAuthorized: boolean = false;
   boardsArr: BoardModel[] = [];
+  showClosed: boolean = false;
 
   constructor(private navCtrl: NavController, private trelloService: TrelloService, private boardService: BoardService) { }
 
   ngOnInit(){
-    //alert("comp");
     if (localStorage.getItem("trello_token")){
       this.trelloAuthorized = true;
       this.boardService.getBoards().subscribe( boards => this.boardsArr = boards );
@@ -26,5 +26,14 @@ export class Boards {
     else {
       this.trelloService.trelloAuthorize();
     }
+  }
+
+  onSearch(e:string){
+
+  }
+
+  // additional check for authorization
+  ionViewCanLeave(): boolean {
+    return this.trelloAuthorized;
   }
 }

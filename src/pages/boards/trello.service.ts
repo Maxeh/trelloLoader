@@ -7,7 +7,7 @@ export class TrelloService {
   trelloAuthorize(): void{
     Trello.authorize({
       type: 'redirect',
-      name: 'trelloLoader',
+      name: 'Trello Loader',
       scope: {
         read: 'true',
         write: 'true' },
