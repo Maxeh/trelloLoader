@@ -9,7 +9,7 @@
 
 <ion-content *ngIf="trelloAuthorized">
 
-  <ion-searchbar placeholder="Suchen" #search (ionInput)="onSearch(search.value)"></ion-searchbar>
+  <ion-searchbar #search value="" placeholder="Suchen"></ion-searchbar>
 
   <ion-item no-lines>
     <ion-label>Geschlossene Boards zeigen</ion-label>
@@ -17,11 +17,9 @@
   </ion-item>
 
   <ion-list>
-    <div *ngFor="let board of boardsArr">
-      <button ion-item *ngIf="(showClosed || !board.closed) && (board.name | filterSearch)">
-        {{board.name}}
-      </button>
-    </div>
+    <button ion-item *ngFor="let board of (boardsArr | FilterBoard : showClosed : search.value)">
+      {{board.name}}
+    </button>
   </ion-list>
 
 </ion-content>

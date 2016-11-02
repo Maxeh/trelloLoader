@@ -28,10 +28,6 @@ export class Boards {
     }
   }
 
-  onSearch(e:string){
-
-  }
-
   // additional check for authorization
   ionViewCanLeave(): boolean {
     return this.trelloAuthorized;
