@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Boards } from '../pages/boards/boards.component';
+import { Lists } from '../pages/lists/lists.component';
 import { FilterBoard } from '../pages/boards/board.filter';
 import { Settings } from '../pages/settings/settings.component';
 
@@ -9,6 +10,7 @@ import { Settings } from '../pages/settings/settings.component';
   declarations: [
     MyApp,
     Boards,
+    Lists,
     Settings,
     FilterBoard
   ],
@@ -19,6 +21,7 @@ import { Settings } from '../pages/settings/settings.component';
   entryComponents: [
     MyApp,
     Boards,
+    Lists,
     Settings
   ],
   providers: []

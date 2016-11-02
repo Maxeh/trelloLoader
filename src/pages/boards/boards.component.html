@@ -17,8 +17,8 @@
   </ion-item>
 
   <ion-list>
-    <button ion-item *ngFor="let board of (boardsArr | FilterBoard : showClosed : search.value)">
-      {{board.name}}
+    <button ion-item *ngFor="let board of (boardsArr | FilterBoard : showClosed : search.value)" (click)="openBoard(board.id)">
+      {{board.name}}<br><span style="color:grey; font-size:12px">Mitglieder: {{board.member}}</span>
     </button>
   </ion-list>
 

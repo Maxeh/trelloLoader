@@ -3,7 +3,8 @@ import { NavController } from 'ionic-angular';
 
 import { BoardModel } from "./board.model";
 import { TrelloService } from "./trello.service";
-import { BoardService } from './board.service';
+import { BoardService } from './board.service'
+import { Lists } from '../lists/lists.component';
 
 
 @Component({
@@ -26,6 +27,10 @@ export class Boards {
     else {
       this.trelloService.trelloAuthorize();
     }
+  }
+
+  openBoard(id: string){
+    this.navCtrl.push(Lists, {id: id});
   }
 
   // additional check for authorization
