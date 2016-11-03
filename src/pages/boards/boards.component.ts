@@ -1,31 +1,30 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { BoardModel } from "./board.model";
-import { TrelloService } from "./trello.service";
-import { BoardService } from './board.service'
+import { BoardClass } from "../../shared/classes/board.class";
+import { TrelloAuthService } from '../../shared/services/trelloAuth.service';
+import { TrelloService } from '../../shared/services/trello.service'
 import { Lists } from '../lists/lists.component';
 
 
 @Component({
   selector: 'page-boards',
-  templateUrl: 'boards.component.html',
-  providers: [ TrelloService, BoardService ]
+  templateUrl: 'boards.component.html'
 })
 export class Boards {
   trelloAuthorized: boolean = false;
-  boardsArr: BoardModel[] = [];
+  boardsArr: BoardClass[] = [];
   showClosed: boolean = false;
 
-  constructor(private navCtrl: NavController, private trelloService: TrelloService, private boardService: BoardService) { }
+  constructor(private navCtrl: NavController, private trelloAuthService: TrelloAuthService, private trelloService: TrelloService) { }
 
   ngOnInit(){
     if (localStorage.getItem("trello_token")){
       this.trelloAuthorized = true;
-      this.boardService.getBoards().subscribe( boards => this.boardsArr = boards );
+      this.trelloService.getBoards().subscribe( boards => this.boardsArr = boards );
     }
     else {
-      this.trelloService.trelloAuthorize();
+      this.trelloAuthService.trelloAuthorize();
     }
   }
 

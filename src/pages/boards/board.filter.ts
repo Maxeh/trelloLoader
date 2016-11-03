@@ -1,11 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {BoardModel} from "./board.model";
+
+import { BoardClass } from "../../shared/classes/board.class";
 
 @Pipe({
   name: 'FilterBoard'
 })
 export class FilterBoard implements PipeTransform {
-  transform(items: Array<BoardModel>, showClosed: boolean, searchTerm:string): Array<BoardModel> {
+  transform(items: Array<BoardClass>, showClosed: boolean, searchTerm:string): Array<BoardClass> {
     return items.filter(item => ((showClosed || !item.closed ) && (item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1)) );
   }
 }

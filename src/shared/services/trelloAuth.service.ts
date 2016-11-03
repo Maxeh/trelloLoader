@@ -1,6 +1,6 @@
 declare var Trello: any;
 
-export class TrelloService {
+export class TrelloAuthService {
 
   constructor(){ }
 

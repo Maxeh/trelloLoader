@@ -11,9 +11,14 @@
 
   <ion-searchbar #search value="" placeholder="Suchen"></ion-searchbar>
 
+  <ion-item no-lines>
+    <ion-label>Geschlossene Lists zeigen</ion-label>
+    <ion-toggle [(ngModel)]="showClosed"></ion-toggle>
+  </ion-item>
+
   <ion-list>
-    <button>
-      {{boardId}}
+    <button ion-item *ngFor="let list of (listsArr | FilterList : showClosed : search.value)">
+      {{list.name}}
     </button>
   </ion-list>
 
