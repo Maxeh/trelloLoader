@@ -11,7 +11,6 @@ import { FilterList } from '../pages/lists/list.filter';
 import { Settings } from '../pages/settings/settings.component';
 
 // global services
-import { AlertService } from '../shared/services/alert.service';
 import { TrelloAuthService } from "../shared/services/trelloAuth.service";
 import { TrelloService } from "../shared/services/trello.service";
 
@@ -36,7 +35,6 @@ import { TrelloService } from "../shared/services/trello.service";
     Settings
   ],
   providers: [
-    AlertService,
     TrelloAuthService,
     TrelloService
   ]

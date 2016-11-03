@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import {Http, Response, RequestOptions, Headers} from '@angular/http';
 import { Observable } from "rxjs";
 
 import { BoardClass } from "../classes/board.class";
@@ -39,10 +39,25 @@ export class TrelloService {
           let data = res.json();
           let listsArr: ListClass[] = [];
           for (let i = 0; i < data.length; i++) {
-            listsArr.push(new ListClass(data[i].id, data[i].name, data[i].closed))
+            listsArr.push(new ListClass(data[i].id, data[i].name))
           }
           return listsArr || [];
         })
+      .catch(this.handleError);
+  }
+
+  addList(idBoard: string, name: string){
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    let url = "https://api.trello.com/1/lists/";
+
+    return this.http.post(url, {name: name, idBoard: idBoard, key: this.apiKey, token: this.token}, options)
+      .map(
+        (res: Response) => {
+          let data = res.json();
+          return new ListClass(data.id, data.name);
+        }
+      )
       .catch(this.handleError);
   }
 

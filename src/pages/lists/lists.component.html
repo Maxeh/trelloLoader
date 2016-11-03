@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Boards</ion-title>
+    <ion-title>{{boardName}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -11,15 +11,22 @@
 
   <ion-searchbar #search value="" placeholder="Suchen"></ion-searchbar>
 
-  <ion-item no-lines>
-    <ion-label>Geschlossene Lists zeigen</ion-label>
-    <ion-toggle [(ngModel)]="showClosed"></ion-toggle>
-  </ion-item>
-
   <ion-list>
-    <button ion-item *ngFor="let list of (listsArr | FilterList : showClosed : search.value)">
-      {{list.name}}
-    </button>
+    <ion-item-sliding #item *ngFor="let list of (listsArr | FilterList : search.value)">
+      <button ion-item>
+        {{list.name}}
+      </button>
+      <ion-item-options side="right">
+        <button ion-button (click)="changeList(list.id, list.name)">Ändern</button>
+        <button ion-button color="danger" (click)="deleteList(list.id)">Löschen</button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
+
+  <ion-fab bottom right>
+    <button ion-fab (click)="addList()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 
 </ion-content>

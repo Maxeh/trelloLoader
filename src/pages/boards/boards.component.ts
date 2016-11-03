@@ -28,8 +28,8 @@ export class Boards {
     }
   }
 
-  openBoard(id: string){
-    this.navCtrl.push(Lists, {id: id});
+  openBoard(id: string, name: string){
+    this.navCtrl.push(Lists, {id: id, name: name});
   }
 
   // additional check for authorization

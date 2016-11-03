@@ -6,7 +6,7 @@ import { ListClass } from "../../shared/classes/list.class";
   name: 'FilterList'
 })
 export class FilterList implements PipeTransform {
-  transform(items: Array<ListClass>, showClosed: boolean, searchTerm:string): Array<ListClass> {
-    return items.filter(item => ((showClosed || !item.closed ) && (item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1)) );
+  transform(items: Array<ListClass>, searchTerm:string): Array<ListClass> {
+    return items.filter(item => item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1);
   }
 }
