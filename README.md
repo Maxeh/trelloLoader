@@ -1,6 +1,8 @@
 # trelloLoader
 
-trelloLoader is a simple app that implements some features of Ionic2. It should not be used productively. The app gives an insight into the way an Ionic2 app looks like.
+trelloLoader is a simple app that implements some features of Ionic2. The app gives an insight into the way an Ionic2 app looks like. 
+
+The app displays boards/lists of your personal Trello baord. 
 
 ## Installation
 
