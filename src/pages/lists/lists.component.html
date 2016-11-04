@@ -12,13 +12,13 @@
   <ion-searchbar #search value="" placeholder="Suchen"></ion-searchbar>
 
   <ion-list>
-    <ion-item-sliding #item *ngFor="let list of (listsArr | FilterList : search.value)">
-      <button ion-item>
+    <ion-item-sliding #slidingItem *ngFor="let list of (listsArr | FilterList : search.value)">
+      <button ion-item detail-none>
         {{list.name}}
       </button>
       <ion-item-options side="right">
-        <button ion-button (click)="changeList(list.id, list.name)">Ändern</button>
-        <button ion-button color="danger" (click)="deleteList(list.id)">Löschen</button>
+        <button ion-button (click)="changeList(list.id, list.name); slidingItem.close()">Ändern</button>
+        <button ion-button color="danger" (click)="closeList(list.id, list.name)">Archivieren</button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

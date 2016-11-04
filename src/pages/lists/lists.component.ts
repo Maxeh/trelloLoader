@@ -13,7 +13,7 @@ export class Lists {
   boardName: string;
   listsArr: ListClass[] = [];
 
-  constructor(public params: NavParams, public alertCtrl: AlertController, public trelloService: TrelloService, private toastCtrl: ToastController){}
+  constructor(private params: NavParams, private alertCtrl: AlertController, private trelloService: TrelloService, private toastCtrl: ToastController){}
 
   ngOnInit(){
     this.boardId = this.params.get("id");
@@ -38,12 +38,19 @@ export class Lists {
         {
           text: "Okay",
           handler: (data) => {
+            if (data.name == "" || data.name.length > 100) return false;
+
             this.trelloService.addList(this.boardId, data.name).subscribe(
-              () => {
-                this.trelloService.getLists(this.boardId).subscribe(lists => this.listsArr = lists);
+              (newList) => {
+                /* copy array in order to invoke angulars update function */
+                let tempListArr: ListClass[];
+                tempListArr = this.listsArr.slice();
+                tempListArr.unshift(newList);
+                this.listsArr = tempListArr.slice();
+
                 let toast = this.toastCtrl.create({
                   message: 'Die Liste wurde erfolgreich hinzugefügt.',
-                  duration: 2500,
+                  duration: 2200,
                   position: "top"
                 });
                 toast.present();
@@ -62,7 +69,7 @@ export class Lists {
       inputs: [
         {
           name: "name",
-          placeholder: oldName
+          value: oldName
         }
       ],
       buttons: [
@@ -73,10 +80,68 @@ export class Lists {
         {
           text: "Okay",
           handler: (data) => {
-            if (data.name == "") return false; // do not close alert
-            if (data.name == oldName) return true; // close alert, but do not change anything
+            if (data.name == "" || data.name == oldName) return false; // do not close alert
 
+            this.trelloService.changeList(listId, data.name).subscribe(
+              (changedList) => {
+                /* replace the changed object */
+                this.listsArr.forEach((value, index) => {
+                  if (value.id == listId)
+                    this.listsArr[index] = changedList;
+                });
 
+                /* copy array in order to invoke angulars update function */
+                let tempListArr: ListClass[];
+                tempListArr = this.listsArr.slice();
+                this.listsArr = tempListArr.slice();
+
+                let toast = this.toastCtrl.create({
+                  message: 'Die Liste wurde erfolgreich aktualisiert.',
+                  duration: 2200,
+                  position: "top"
+                });
+                toast.present();
+              }
+            );
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  closeList(listId: string, name: string) {
+    let alert = this.alertCtrl.create({
+      title: name + " wirklich archivieren?",
+      buttons: [
+        {
+          text: "Abbrechen",
+          role: "Cancel"
+        },
+        {
+          text: "Okay",
+          handler: () => {
+            this.trelloService.closeList(listId).subscribe(
+              () => {
+                /* delete the closed object */
+                this.listsArr.forEach((value, index) => {
+                  if (value.id == listId)
+                    this.listsArr.splice(index, 1);
+                });
+
+                /* copy array in order to invoke angulars update function */
+                let tempListArr: ListClass[];
+                tempListArr = this.listsArr.slice();
+                this.listsArr = tempListArr.slice();
+
+                let toast = this.toastCtrl.create({
+                  message: 'Die Liste wurde erfolgreich archiviert.',
+                  duration: 2200,
+                  position: "top"
+                });
+                toast.present();
+              }
+            );
           }
         }
       ]

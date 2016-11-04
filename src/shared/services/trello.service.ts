@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http, Response, RequestOptions, Headers} from '@angular/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from "rxjs";
 
 import { BoardClass } from "../classes/board.class";
@@ -15,7 +15,7 @@ export class TrelloService {
     this.token = localStorage.getItem("trello_token");
   }
 
-  getBoards(): Observable<BoardClass[]> {
+  getBoards() {
     let url = "https://api.trello.com/1/members/me/boards?key=" + this.apiKey + "&token=" + this.token;
     return this.http.get(url)
       .map(
@@ -31,7 +31,7 @@ export class TrelloService {
       .catch(this.handleError);
   }
 
-  getLists(id: string): Observable<ListClass[]> {
+  getLists(id: string) {
     let url = "https://api.trello.com/1/boards/" + id + "/lists?key=" + this.apiKey + "&token=" + this.token;
     return this.http.get(url)
       .map(
@@ -46,7 +46,7 @@ export class TrelloService {
       .catch(this.handleError);
   }
 
-  addList(idBoard: string, name: string){
+  addList(idBoard: string, name: string) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     let url = "https://api.trello.com/1/lists/";
@@ -58,6 +58,30 @@ export class TrelloService {
           return new ListClass(data.id, data.name);
         }
       )
+      .catch(this.handleError);
+  }
+
+  changeList(idList: string, name: string) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    let url = "https://api.trello.com/1/lists/" + idList;
+
+    return this.http.put(url, {name: name, key: this.apiKey, token: this.token}, options)
+      .map(
+        (res: Response) => {
+          let data = res.json();
+          return new ListClass(data.id, data.name);
+        }
+      )
+      .catch(this.handleError);
+  }
+
+  closeList(idList: string) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    let url = "https://api.trello.com/1/lists/" + idList + "/closed";
+
+    return this.http.put(url, {value: true, key: this.apiKey, token: this.token}, options)
       .catch(this.handleError);
   }
 
