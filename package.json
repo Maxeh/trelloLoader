@@ -1,7 +1,6 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "trelloLoader",
+  "author": "Maximilian Ehbauer",
   "private": true,
   "scripts": {
     "build": "ionic-app-scripts build",
@@ -33,7 +32,7 @@
     "@ionic/app-scripts": "0.0.38",
     "typescript": "2.0.6"
   },
-  "description": "trelloLoader: An Ionic project",
+  "description": "trelloLoader: display trello boards/lists",
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",
