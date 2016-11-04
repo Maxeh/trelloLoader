@@ -6,19 +6,19 @@ trelloLoader is a simple app that implements some features of Ionic2. It should 
 
 1) Clone this repository
 
-```git clone https://github.com/Maxeh/trelloLoader.git´´´
+```git clone https://github.com/Maxeh/trelloLoader.git```
 
 2) Navigate to the trelloLoader directory:
 
-```cd trelloLoader´´´
+```cd trelloLoader```
 
 3) Install the dependencies
 
-```npm install´´´
+```npm install```
 
 3) Start the app in the browser
 
-```ionic serve´´´
+```ionic serve```
 
 Warning: Do not use "ionic serve --lab"	because the Trello authentication won't work that way.
 
