@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 
 import { BoardClass } from "../classes/board.class";
 import { ListClass } from "../classes/list.class";
+import { CardClass } from "../classes/card.class";
 
 
 @Injectable()
@@ -13,6 +14,22 @@ export class TrelloService {
 
   constructor(private http: Http){
     this.token = localStorage.getItem("trello_token");
+  }
+
+  getCards(listId: string){
+    let url = "https://api.trello.com/1/lists/" + listId + "/cards?key=" + this.apiKey + "&token=" + this.token;
+    return this.http.get(url)
+      .map(
+        (res: Response) => {
+          let data = res.json();
+          let cardsArr: CardClass[] = [];
+          for (let i = 0; i < data.length; i++){
+            cardsArr.push(new CardClass(data[i].id, data[i].name, data[i].desc, data[i].closed))
+          }
+          return cardsArr || [ ];
+        }
+      )
+      .catch(this.handleError);
   }
 
   getBoards() {

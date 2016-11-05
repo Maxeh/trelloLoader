@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import {NavParams, AlertController, ToastController} from "ionic-angular";
+import { NavController, NavParams, AlertController, ToastController } from "ionic-angular";
 
 import { TrelloService } from "../../shared/services/trello.service";
 import { ListClass } from "../../shared/classes/list.class";
+import { Cards } from "../cards/cards.component"
 
 @Component({
   selector: 'page-lists',
@@ -13,13 +14,17 @@ export class Lists {
   boardName: string;
   listsArr: ListClass[] = [];
 
-  constructor(private params: NavParams, private alertCtrl: AlertController, private trelloService: TrelloService, private toastCtrl: ToastController){}
+  constructor(private navCtrl: NavController, private params: NavParams, private alertCtrl: AlertController, private trelloService: TrelloService, private toastCtrl: ToastController){}
 
   ngOnInit(){
     this.boardId = this.params.get("id");
     this.boardName = this.params.get("name");
 
     this.trelloService.getLists(this.boardId).subscribe( lists => this.listsArr = lists );
+  }
+
+  openList(id: string, name: string){
+    this.navCtrl.push(Cards, {id: id, name: name});
   }
 
   addList() {

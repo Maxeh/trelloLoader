@@ -8,6 +8,8 @@ import { FilterBoard } from '../pages/boards/board.filter';
 import { Lists } from '../pages/lists/lists.component';
 import { FilterList } from '../pages/lists/list.filter';
 
+import { Cards } from '../pages/cards/cards.component';
+
 import { Settings } from '../pages/settings/settings.component';
 
 // global services
@@ -20,6 +22,7 @@ import { TrelloService } from "../shared/services/trello.service";
     MyApp,
     Boards,
     Lists,
+    Cards,
     Settings,
     FilterBoard,
     FilterList
@@ -32,6 +35,7 @@ import { TrelloService } from "../shared/services/trello.service";
     MyApp,
     Boards,
     Lists,
+    Cards,
     Settings
   ],
   providers: [

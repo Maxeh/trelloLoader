@@ -13,7 +13,7 @@
 
   <ion-list>
     <ion-item-sliding #slidingItem *ngFor="let list of (listsArr | FilterList : search.value)">
-      <button ion-item detail-none>
+      <button ion-item detail-none (click)="openList(list.id, list.name)">
         {{list.name}}
       </button>
       <ion-item-options side="right">
