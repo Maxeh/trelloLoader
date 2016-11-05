@@ -21,7 +21,7 @@ export class Cards {
     this.listId = this.params.get("id");
     this.listName = this.params.get("name");
 
-    this.trelloService.getCards(this.listId);
+    this.trelloService.getCards(this.listId).subscribe((cards) => this.cardsArr = cards);
   }
 
 }

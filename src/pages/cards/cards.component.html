@@ -9,10 +9,11 @@
 
 <ion-content>
 
-  <ion-list>
-    <button ion-item *ngFor="let card of cardsArr">
+  <ion-card *ngFor="let card of cardsArr">
+    <ion-card-header>
       {{card.name}}
-    </button>
-  </ion-list>
+    </ion-card-header>
+    <ion-card-content [innerHTML] = card.desc ></ion-card-content>
+  </ion-card>
 
 </ion-content>

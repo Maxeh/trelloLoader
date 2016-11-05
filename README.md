@@ -2,7 +2,7 @@
 
 trelloLoader is a simple Ionic2 app that was created using Angular2 and TypeScript. The app gives an insight into the way an Ionic2 app looks like. 
 
-The app displays boards/lists of your personal Trello board. 
+The app displays boards/lists/cards of your personal Trello board. 
 
 ## Installation
 
